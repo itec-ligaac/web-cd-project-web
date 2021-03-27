@@ -57,13 +57,35 @@ export const CovidDataTable = () => {
       sorter: {
         compare: (a: covidData, b: covidData) =>
           a.Infection_Risk - b.Infection_Risk,
-        multiple: 3,
+      },
+      render: (record: any) => {
+        return (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              paddingLeft: "5px",
+              display: "flex",
+              justifyContent: "center",
+              backgroundColor:
+                record > 5 ? (record > 10 ? "orange" : "yellow") : "lightgreen",
+            }}
+          >
+            <b> {record}</b>
+          </div>
+        );
       },
     },
   ];
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+      }}
+    >
       <TableHeader>
         <Input
           onChange={handleSearchChange}
@@ -76,13 +98,7 @@ export const CovidDataTable = () => {
         dataSource={filteredTableData}
         scroll={{ x: 200, y: "maximum-content" }}
         columns={columns}
-        style={{
-          marginLeft: 160,
-          marginRight: 160,
-          marginTop: 50,
-          scale: 20,
-        }}
       />
-    </>
+    </div>
   );
 };
