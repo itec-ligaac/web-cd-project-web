@@ -8,7 +8,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 
@@ -46,27 +46,53 @@ export const TravelData = () => {
   console.log(cityArray);
 
   return (
-    <Container>
-      <Card
-        style={{
-          width: "30vw",
-          height: "30vw",
-        }}
-      >
-        <Select
-          defaultValue="Find a city!"
-          style={{ width: 120 }}
-          onChange={handleSelectCountry}
+    <>
+      <Container>
+        <Card
+          title="Search Hotels"
+          style={{ width: "60%", margin: "20px" }}
+        ></Card>
+        <Card
+          title="Check the weather"
+          style={{
+            width: "30%",
+            height: "30vw",
+            margin: "20px",
+          }}
         >
-          {cityArray.map((city: any) => {
-            return (
-              <Option key={city.id} value={city.name}>
-                {city.name}
-              </Option>
-            );
-          })}
-        </Select>
-      </Card>
-    </Container>
+          <Select
+            defaultValue="Find a city!"
+            style={{ width: 120 }}
+            onChange={handleSelectCountry}
+          >
+            {cityArray.map((city: any) => {
+              return (
+                <Option key={city.id} value={city.name}>
+                  {city.name}
+                </Option>
+              );
+            })}
+          </Select>
+        </Card>
+      </Container>
+
+      <Container>
+        <Card
+          title="Search Plane Tickets"
+          style={{ width: "100%", margin: "20px" }}
+        ></Card>
+      </Container>
+
+      <Container>
+        <Card
+          title="Explore the world map!"
+          style={{ width: "50%", margin: "20px" }}
+        ></Card>
+        <Card
+          title="News about travelling during the pandemic"
+          style={{ width: "50%", margin: "20px" }}
+        ></Card>
+      </Container>
+    </>
   );
 };
