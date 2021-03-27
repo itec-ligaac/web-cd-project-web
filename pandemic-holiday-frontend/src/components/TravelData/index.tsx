@@ -3,6 +3,8 @@ import axios from "axios";
 import { Select, Card } from "antd";
 import Cities from "../city.list.json";
 import styled from "styled-components";
+import { useHotelData } from "./useHotelData";
+import { HotelTableData } from "./HotelTable";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +16,11 @@ const Container = styled.div`
 
 const { Option } = Select;
 
+// @ts-ignore
+export const TravelDataContext = React.createContext();
+
 export const TravelData = () => {
+  const { hotelTableData, setHotelTableData } = useHotelData();
   useEffect(() => {
     const getWeather = async () => {
       const response = await axios
@@ -46,12 +52,11 @@ export const TravelData = () => {
   console.log(cityArray);
 
   return (
-    <>
+    <TravelDataContext.Provider value={{ hotelTableData, setHotelTableData }}>
       <Container>
-        <Card
-          title="Search Hotels"
-          style={{ width: "60%", margin: "20px" }}
-        ></Card>
+        <Card title="Search Hotels" style={{ width: "60%", margin: "20px" }}>
+          <HotelTableData />
+        </Card>
         <Card
           title="Check the weather"
           style={{
@@ -93,6 +98,6 @@ export const TravelData = () => {
           style={{ width: "50%", margin: "20px" }}
         ></Card>
       </Container>
-    </>
+    </TravelDataContext.Provider>
   );
 };
