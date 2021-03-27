@@ -1,39 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { CovidData } from "../CovidData";
 import { TravelData } from "../TravelData";
 
+import { Layout, Menu, Breadcrumb } from "antd";
+
+const { Header, Footer, Content } = Layout;
+
 export const AppRouting = () => {
   return (
     <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/covid">covid</Link>
-          </li>
-          <li>
-            <Link to="/travel">travel</Link>
-          </li>
-        </ul>
-
-        <hr />
-
-        {/*
-        A <Switch> looks through all its children <Route>
-        elements and renders the first one whose path
-        matches the current URL. Use a <Switch> any time
-        you have multiple routes, but you want only one
-        of them to render at a time
-      */}
-        <Switch>
-          <Route exact path="/covid">
-            <CovidData />
-          </Route>
-          <Route path="/travel">
-            <TravelData />
-          </Route>
-        </Switch>
-      </div>
+      <Layout style={{ minHeight: "100vh", width: "100vw" }}>
+        <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+          <div className="logo" />
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
+            <Menu.Item key="1">
+              <Link to="/travel">Travel destinations</Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/covid">COVID 19 Information and updates</Link>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Content
+          className="site-layout"
+          style={{
+            padding: "50px",
+            marginTop: "50px",
+          }}
+        >
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 380, backgroundColor: "white" }}
+          >
+            <Switch>
+              <Route exact path="/covid">
+                <CovidData />
+              </Route>
+              <Route path="/travel">
+                <TravelData />
+              </Route>
+            </Switch>
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          {" ©2021 Created by Catalin Chita & Daniel Daianu"}
+        </Footer>
+      </Layout>
     </Router>
   );
 };
