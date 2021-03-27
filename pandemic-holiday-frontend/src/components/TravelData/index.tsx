@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Select, Card } from "antd";
 import Cities from "../city.list.json";
@@ -21,25 +21,24 @@ export const TravelDataContext = React.createContext();
 
 export const TravelData = () => {
   const { hotelTableData, setHotelTableData } = useHotelData();
-  useEffect(() => {
-    const getWeather = async () => {
-      const response = await axios
-        .get(
-          "https://api.openweathermap.org/data/2.5/weather?q=London&appid=98d72ef0d8203ca4560b3295e1efa62a"
-        )
-        .then(function (response: any) {
-          console.log(response.data);
-        })
-        .catch(function (responseError: any) {
-          console.log(responseError.code);
-        });
-    };
+  const [selectedCityWeather, setSelectedCityWeather] = useState<any>("");
 
-    getWeather();
-  }, []);
+  const getWeather = async (city: any) => {
+    const response = await axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=98d72ef0d8203ca4560b3295e1efa62a`
+      )
+      .then(function (response: any) {
+        console.log(response.data);
+        setSelectedCityWeather(response.data);
+      })
+      .catch(function (responseError: any) {
+        console.log(responseError.code);
+      });
+  };
 
-  function handleSelectCountry(value: any) {
-    console.log(`selected ${value}`);
+  function handleSelectCity(value: any) {
+    getWeather(value);
   }
 
   let cityArray = JSON.parse(JSON.stringify(Cities));
@@ -48,8 +47,6 @@ export const TravelData = () => {
     if (a.stat.population < b.stat.population) return 1;
     else return -1;
   });
-
-  console.log(cityArray);
 
   return (
     <TravelDataContext.Provider value={{ hotelTableData, setHotelTableData }}>
@@ -66,9 +63,10 @@ export const TravelData = () => {
           }}
         >
           <Select
+            showSearch
             defaultValue="Find a city!"
-            style={{ width: 120 }}
-            onChange={handleSelectCountry}
+            style={{ width: "100%" }}
+            onChange={handleSelectCity}
           >
             {cityArray.map((city: any) => {
               return (
@@ -78,6 +76,28 @@ export const TravelData = () => {
               );
             })}
           </Select>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "10px",
+            }}
+          >
+            <h3>
+              <b>{selectedCityWeather?.weather?.[0].description}</b>
+            </h3>
+            <h3>
+              humidity: <b>{selectedCityWeather?.main?.humidity} %</b>
+            </h3>
+            <h3>
+              wind speed:<b> {selectedCityWeather?.wind?.speed} Km/h</b>
+            </h3>
+            <h3>
+              temperature:{" "}
+              <b> {(selectedCityWeather?.main?.temp - 273.15).toFixed(2)} °C</b>
+            </h3>
+          </div>
         </Card>
       </Container>
 
