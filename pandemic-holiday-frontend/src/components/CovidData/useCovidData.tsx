@@ -10,11 +10,11 @@ interface covidData {
 
 export const useCovidData = () => {
   const [covidTableData, setCovidTableData] = useState<string[]>([]);
-
+  console.log(covidTableData);
   const getDefaultCovidData = async () => {
     try {
       const response = await axios.get(
-        `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/europe`,
+        `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/`,
         {
           headers: {
             "x-rapidapi-key":
