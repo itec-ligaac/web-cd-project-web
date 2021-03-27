@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import { CovidData } from "../CovidData";
 import { TravelData } from "../TravelData";
 
@@ -51,6 +57,7 @@ export const AppRouting = () => {
               <Route path="/landingpage">
                 <LandingPage />
               </Route>
+              <Redirect to="/landingpage" />
             </Switch>
           </div>
         </Content>
