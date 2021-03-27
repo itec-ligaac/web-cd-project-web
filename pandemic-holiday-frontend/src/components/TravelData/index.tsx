@@ -5,6 +5,7 @@ import Cities from "../city.list.json";
 import styled from "styled-components";
 import { useHotelData } from "./useHotelData";
 import { HotelTableData } from "./HotelTable";
+import { Map } from "./map";
 
 const Container = styled.div`
   width: 100%;
@@ -22,6 +23,10 @@ export const TravelDataContext = React.createContext();
 export const TravelData = () => {
   const { hotelTableData, setHotelTableData } = useHotelData();
   const [selectedCityWeather, setSelectedCityWeather] = useState<any>("");
+
+  var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
+  mapboxgl.accessToken =
+    "pk.eyJ1IjoiY2F0YWxpbmNoaXRhIiwiYSI6ImNrbXJ6c2oyczBjbTEybm14bHdvaWpta24ifQ.I0p207zOOFAoHTHyf4Uueg";
 
   const getWeather = async (city: any) => {
     const response = await axios
@@ -54,6 +59,15 @@ export const TravelData = () => {
         <Card title="Search Hotels" style={{ width: "60%", margin: "20px" }}>
           <HotelTableData />
         </Card>
+        <Card
+          title="Explore the world map!"
+          style={{ width: "50%", margin: "20px", height: "400px" }}
+        >
+          <Map />
+        </Card>
+      </Container>
+
+      <Container>
         <Card
           title="Check the weather"
           style={{
@@ -99,23 +113,9 @@ export const TravelData = () => {
             </h3>
           </div>
         </Card>
-      </Container>
-
-      <Container>
-        <Card
-          title="Search Plane Tickets"
-          style={{ width: "100%", margin: "20px" }}
-        ></Card>
-      </Container>
-
-      <Container>
-        <Card
-          title="Explore the world map!"
-          style={{ width: "50%", margin: "20px" }}
-        ></Card>
         <Card
           title="Travelling during the pandemic"
-          style={{ width: "50%", margin: "20px" }}
+          style={{ width: "80%", margin: "20px" }}
         >
           <div style={{ marginBottom: "20px" }}>
             {" "}
