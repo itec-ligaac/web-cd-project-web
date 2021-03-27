@@ -13,7 +13,6 @@ export const HotelTableData = () => {
       dataIndex: "name",
       title: "name",
     },
-    {},
   ];
 
   return (
