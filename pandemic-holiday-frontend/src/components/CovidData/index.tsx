@@ -17,12 +17,18 @@ export const CovidData = () => {
   return (
     <CovidDataContext.Provider value={{ covidTableData, setCovidTableData }}>
       <Container>
-        <iframe
-          width="60%"
-          style={{ margin: "20px", height: "87vh" }}
-          src="https://app.developer.here.com/coronavirus/"
-          frameBorder="1"
-        ></iframe>
+        <div style={{ width: "60%", margin: "20px", height: "87vh" }}>
+          <iframe
+            style={{ height: "87vh", width: "100%" }}
+            src="https://app.developer.here.com/coronavirus/"
+            frameBorder="1"
+          ></iframe>
+          <div style={{ marginBottom: "20px" }}>
+            <a href="https://app.developer.here.com/coronavirus/">
+              https://app.developer.here.com/coronavirus/
+            </a>
+          </div>
+        </div>
         <div
           style={{
             width: "40%",
@@ -34,6 +40,7 @@ export const CovidData = () => {
           <CovidDataTable />
         </div>
       </Container>
+
       <div style={{ width: "100%", padding: "20px", paddingTop: "20px" }}>
         <iframe
           height="876"
@@ -41,6 +48,12 @@ export const CovidData = () => {
           src="https://ourworldindata.org/coronavirus"
           frameBorder="1"
         ></iframe>
+
+        <div style={{ marginBottom: "20px" }}>
+          <a href="https://ourworldindata.org/coronavirus">
+            https://ourworldindata.org/coronavirus
+          </a>
+        </div>
       </div>
     </CovidDataContext.Provider>
   );

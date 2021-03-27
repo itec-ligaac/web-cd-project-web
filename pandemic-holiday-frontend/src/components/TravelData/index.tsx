@@ -114,9 +114,22 @@ export const TravelData = () => {
           style={{ width: "50%", margin: "20px" }}
         ></Card>
         <Card
-          title="News about travelling during the pandemic"
+          title="Travelling during the pandemic"
           style={{ width: "50%", margin: "20px" }}
-        ></Card>
+        >
+          <div style={{ marginBottom: "20px" }}>
+            {" "}
+            <a href="https://www.cdc.gov/coronavirus/2019-ncov/travelers/travel-during-covid19.html">
+              https://www.cdc.gov/coronavirus/2019-ncov/travelers/travel-during-covid19.html
+            </a>
+          </div>
+          <iframe
+            width="100%%"
+            height="600px"
+            src="https://www.cdc.gov/coronavirus/2019-ncov/travelers/travel-during-covid19.html"
+            frameBorder="1"
+          ></iframe>
+        </Card>
       </Container>
     </TravelDataContext.Provider>
   );
