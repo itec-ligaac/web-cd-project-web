@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { AppRouting } from "./components/AppRouting";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+import 'antd/dist/antd.css';
 
 function App() {
   return <AppRouting />;
