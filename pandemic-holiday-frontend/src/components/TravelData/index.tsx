@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Select, Card, DatePicker, Input } from "antd";
+import { Select, Card, Input, Button } from "antd";
 import Cities from "../city.list.json";
 import styled from "styled-components";
 import { useHotelData } from "./useHotelData";
@@ -21,7 +21,13 @@ const { Option } = Select;
 export const TravelDataContext = React.createContext();
 
 export const TravelData = () => {
-  const { hotelTableData, setHotelTableData } = useHotelData();
+  const {
+    hotelTableData,
+    setHotelTableData,
+    hotelCity,
+    setHotelCity,
+    getHotelData,
+  } = useHotelData();
   const [selectedCityWeather, setSelectedCityWeather] = useState<any>("");
 
   var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
@@ -53,44 +59,43 @@ export const TravelData = () => {
     else return -1;
   });
 
-  const [lat, setLat] = useState();
-  const [lon, setLon] = useState();
-  const [checkIn, setCheckIn] = useState();
-  const [checkOut, setCheckOut] = useState();
-
   return (
-    <TravelDataContext.Provider value={{ hotelTableData, setHotelTableData }}>
+    <TravelDataContext.Provider
+      value={{ hotelTableData, setHotelTableData, hotelCity, setHotelCity }}
+    >
       <Container>
-        <Card title="Search Hotels" style={{ width: "60%", margin: "20px" }}>
+        <Card
+          title="Search for top 3 hotels in your city. Cut Away hours of
+         seeking through hundreds of hotels!
+        "
+          style={{ width: "60%", margin: "20px" }}
+        >
           <div
             style={{
               display: "flex",
+              marginBottom: "20px",
+              flexWrap: "wrap",
             }}
           >
             <Input
-              value={lat}
-              placeholder="latitude"
+              value={hotelCity}
+              placeholder="look for hotels in your city"
               onChange={(e: any) => {
-                setLat(e.target.value);
-                console.log(lat);
+                setHotelCity(e.target.value);
               }}
+              style={{ marginRight: "10px" }}
             />
-            <Input
-              value={lon}
-              placeholder="longitude"
-              onChange={(e: any) => {
-                setLon(e.target.value);
-                console.log(lon);
-              }}
-            />
-            <DatePicker placeholder="Enter start date" />
-            <DatePicker placeholder="Enter end date" />
+            <Button onClick={() => getHotelData()}>Search</Button>
           </div>
           <HotelTableData />
         </Card>
         <Card
           title="Explore the world map!"
-          style={{ width: "50%", margin: "20px", height: "400px" }}
+          style={{
+            width: "50%",
+            margin: "20px",
+            height: "400px",
+          }}
         >
           <Map />
         </Card>
