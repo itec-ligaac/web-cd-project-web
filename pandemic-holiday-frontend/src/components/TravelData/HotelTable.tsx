@@ -10,30 +10,17 @@ export const HotelTableData = () => {
 
   const columns = [
     {
-      dataIndex: "code",
-      title: "Code",
-    },
-
-    {
       dataIndex: "name",
-      title: "Name",
+      title: "name",
     },
-    {
-      dataIndex: "rate",
-      title: "Rate",
-    },
-    {
-      dataIndex: "tax",
-      title: "Tax",
-    },
+    {},
   ];
 
   return (
     <>
       <Table
         //@ts-ignore
-        dataSource={hotelTableData}
-        scroll={{ x: 200, y: "maximum-content" }}
+        dataSource={hotelTableData?.suggestions?.[1]?.entities}
         columns={columns}
         style={{
           scale: 20,
