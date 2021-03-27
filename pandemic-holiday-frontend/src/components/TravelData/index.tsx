@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Select, Card } from "antd";
+import { Select, Card, DatePicker, Input } from "antd";
 import Cities from "../city.list.json";
 import styled from "styled-components";
 import { useHotelData } from "./useHotelData";
@@ -53,10 +53,39 @@ export const TravelData = () => {
     else return -1;
   });
 
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
+  const [checkIn, setCheckIn] = useState();
+  const [checkOut, setCheckOut] = useState();
+
   return (
     <TravelDataContext.Provider value={{ hotelTableData, setHotelTableData }}>
       <Container>
         <Card title="Search Hotels" style={{ width: "60%", margin: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <Input
+              value={lat}
+              placeholder="latitude"
+              onChange={(e: any) => {
+                setLat(e.target.value);
+                console.log(lat);
+              }}
+            />
+            <Input
+              value={lon}
+              placeholder="longitude"
+              onChange={(e: any) => {
+                setLon(e.target.value);
+                console.log(lon);
+              }}
+            />
+            <DatePicker placeholder="Enter start date" />
+            <DatePicker placeholder="Enter end date" />
+          </div>
           <HotelTableData />
         </Card>
         <Card
