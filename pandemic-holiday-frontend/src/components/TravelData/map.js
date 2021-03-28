@@ -18,7 +18,7 @@ export const Map = () => {
         position: "absolute",
         top: 80,
         bottom: 20,
-        width: "92%",
+        width: "89%",
       }}
     />
   );
