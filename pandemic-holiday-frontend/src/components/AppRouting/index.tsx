@@ -39,6 +39,7 @@ export const AppRouting = () => {
           style={{
             padding: "50px",
             marginTop: "50px",
+            width: "100vw",
           }}
         >
           <div

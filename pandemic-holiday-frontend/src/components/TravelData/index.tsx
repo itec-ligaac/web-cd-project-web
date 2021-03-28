@@ -13,6 +13,7 @@ const Container = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const { Option } = Select;
@@ -68,7 +69,7 @@ export const TravelData = () => {
           title="Search for top 3 hotels in your city. Cut Away hours of
          seeking through hundreds of hotels!
         "
-          style={{ width: "60%", margin: "20px" }}
+          style={{ flexGrow: 1, margin: "20px", maxWidth: "100%" }}
         >
           <div
             style={{
@@ -83,7 +84,7 @@ export const TravelData = () => {
               onChange={(e: any) => {
                 setHotelCity(e.target.value);
               }}
-              style={{ marginRight: "10px" }}
+              style={{ marginRight: "10px", maxWidth: "60%" }}
             />
             <Button onClick={() => getHotelData()}>Search</Button>
           </div>
@@ -92,9 +93,10 @@ export const TravelData = () => {
         <Card
           title="Explore the world map!"
           style={{
-            width: "50%",
+            flexGrow: 3,
             margin: "20px",
             height: "400px",
+            maxWidth: "100%",
           }}
         >
           <Map />
@@ -105,9 +107,10 @@ export const TravelData = () => {
         <Card
           title="Check the weather"
           style={{
-            width: "30%",
-            height: "30vw",
+            flexGrow: 1,
+            height: "300px",
             margin: "20px",
+            maxWidth: "100%",
           }}
         >
           <Select
@@ -149,7 +152,7 @@ export const TravelData = () => {
         </Card>
         <Card
           title="Travelling during the pandemic"
-          style={{ width: "80%", margin: "20px" }}
+          style={{ flexGrow: 1, margin: "20px" }}
         >
           <div style={{ marginBottom: "20px" }}>
             {" "}
